@@ -7,3 +7,49 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id           String        @id @default(cuid())
+  name         String
+  email        String        @unique
+  password     String
+  logs         Log[]
+  Summary      Summary[]
+  notification Notification?
+}
+
+model Log {
+  id      String   @id @default(cuid())
+  content String[]
+  ownerId String
+  owner   User     @relation(fields: [ownerId], references: [id])
+}
+
+model Summary {
+  id           String        @id @default(cuid())
+  content      String
+  isProductive Boolean
+  format       SummaryFormat
+  createdAt    DateTime
+  ownerId      String
+  owner        User          @relation(fields: [ownerId], references: [id])
+}
+
+enum SummaryFormat {
+  Precise
+  Segmented
+}
+
+model Notification {
+  id               String           @id @default(cuid())
+  NotificationTime NotificationTime
+  CustomMinutes    String[]         @default([])
+  ownerId          String           @unique
+  owner            User             @relation(fields: [ownerId], references: [id])
+}
+
+enum NotificationTime {
+  ManuallyEnter
+  SpecificTimes
+  CustomTimes
+}
