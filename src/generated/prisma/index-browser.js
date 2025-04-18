@@ -155,6 +155,11 @@ exports.Prisma.QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
 };
+
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
 exports.SummaryFormat = exports.$Enums.SummaryFormat = {
   Precise: 'Precise',
   Segmented: 'Segmented'
