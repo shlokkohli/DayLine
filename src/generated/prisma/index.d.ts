@@ -1340,9 +1340,9 @@ export namespace Prisma {
 
   export type UserGroupByOutputType = {
     id: string
-    name: string | null
+    name: string
     email: string
-    password: string
+    password: string | null
     _count: UserCountAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
@@ -1413,9 +1413,9 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      name: string | null
+      name: string
       email: string
-      password: string
+      password: string | null
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -5628,9 +5628,9 @@ export namespace Prisma {
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
     id?: StringFilter<"User"> | string
-    name?: StringNullableFilter<"User"> | string | null
+    name?: StringFilter<"User"> | string
     email?: StringFilter<"User"> | string
-    password?: StringFilter<"User"> | string
+    password?: StringNullableFilter<"User"> | string | null
     logs?: LogListRelationFilter
     Summary?: SummaryListRelationFilter
     notification?: XOR<NotificationNullableScalarRelationFilter, NotificationWhereInput> | null
@@ -5638,9 +5638,9 @@ export namespace Prisma {
 
   export type UserOrderByWithRelationInput = {
     id?: SortOrder
-    name?: SortOrderInput | SortOrder
+    name?: SortOrder
     email?: SortOrder
-    password?: SortOrder
+    password?: SortOrderInput | SortOrder
     logs?: LogOrderByRelationAggregateInput
     Summary?: SummaryOrderByRelationAggregateInput
     notification?: NotificationOrderByWithRelationInput
@@ -5652,8 +5652,8 @@ export namespace Prisma {
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
-    name?: StringNullableFilter<"User"> | string | null
-    password?: StringFilter<"User"> | string
+    name?: StringFilter<"User"> | string
+    password?: StringNullableFilter<"User"> | string | null
     logs?: LogListRelationFilter
     Summary?: SummaryListRelationFilter
     notification?: XOR<NotificationNullableScalarRelationFilter, NotificationWhereInput> | null
@@ -5661,9 +5661,9 @@ export namespace Prisma {
 
   export type UserOrderByWithAggregationInput = {
     id?: SortOrder
-    name?: SortOrderInput | SortOrder
+    name?: SortOrder
     email?: SortOrder
-    password?: SortOrder
+    password?: SortOrderInput | SortOrder
     _count?: UserCountOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
     _min?: UserMinOrderByAggregateInput
@@ -5674,9 +5674,9 @@ export namespace Prisma {
     OR?: UserScalarWhereWithAggregatesInput[]
     NOT?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"User"> | string
-    name?: StringNullableWithAggregatesFilter<"User"> | string | null
+    name?: StringWithAggregatesFilter<"User"> | string
     email?: StringWithAggregatesFilter<"User"> | string
-    password?: StringWithAggregatesFilter<"User"> | string
+    password?: StringNullableWithAggregatesFilter<"User"> | string | null
   }
 
   export type LogWhereInput = {
@@ -5836,9 +5836,9 @@ export namespace Prisma {
 
   export type UserCreateInput = {
     id?: string
-    name?: string | null
+    name?: string
     email: string
-    password: string
+    password?: string | null
     logs?: LogCreateNestedManyWithoutOwnerInput
     Summary?: SummaryCreateNestedManyWithoutOwnerInput
     notification?: NotificationCreateNestedOneWithoutOwnerInput
@@ -5846,9 +5846,9 @@ export namespace Prisma {
 
   export type UserUncheckedCreateInput = {
     id?: string
-    name?: string | null
+    name?: string
     email: string
-    password: string
+    password?: string | null
     logs?: LogUncheckedCreateNestedManyWithoutOwnerInput
     Summary?: SummaryUncheckedCreateNestedManyWithoutOwnerInput
     notification?: NotificationUncheckedCreateNestedOneWithoutOwnerInput
@@ -5856,9 +5856,9 @@ export namespace Prisma {
 
   export type UserUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
     logs?: LogUpdateManyWithoutOwnerNestedInput
     Summary?: SummaryUpdateManyWithoutOwnerNestedInput
     notification?: NotificationUpdateOneWithoutOwnerNestedInput
@@ -5866,9 +5866,9 @@ export namespace Prisma {
 
   export type UserUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
     logs?: LogUncheckedUpdateManyWithoutOwnerNestedInput
     Summary?: SummaryUncheckedUpdateManyWithoutOwnerNestedInput
     notification?: NotificationUncheckedUpdateOneWithoutOwnerNestedInput
@@ -5876,23 +5876,23 @@ export namespace Prisma {
 
   export type UserCreateManyInput = {
     id?: string
-    name?: string | null
+    name?: string
     email: string
-    password: string
+    password?: string | null
   }
 
   export type UserUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type UserUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type LogCreateInput = {
@@ -5941,7 +5941,7 @@ export namespace Prisma {
     content: string
     isProductive: boolean
     format: $Enums.SummaryFormat
-    createdAt: Date | string
+    createdAt?: Date | string
     owner: UserCreateNestedOneWithoutSummaryInput
   }
 
@@ -5950,7 +5950,7 @@ export namespace Prisma {
     content: string
     isProductive: boolean
     format: $Enums.SummaryFormat
-    createdAt: Date | string
+    createdAt?: Date | string
     ownerId: string
   }
 
@@ -5977,7 +5977,7 @@ export namespace Prisma {
     content: string
     isProductive: boolean
     format: $Enums.SummaryFormat
-    createdAt: Date | string
+    createdAt?: Date | string
     ownerId: string
   }
 
@@ -6691,7 +6691,7 @@ export namespace Prisma {
     content: string
     isProductive: boolean
     format: $Enums.SummaryFormat
-    createdAt: Date | string
+    createdAt?: Date | string
   }
 
   export type SummaryUncheckedCreateWithoutOwnerInput = {
@@ -6699,7 +6699,7 @@ export namespace Prisma {
     content: string
     isProductive: boolean
     format: $Enums.SummaryFormat
-    createdAt: Date | string
+    createdAt?: Date | string
   }
 
   export type SummaryCreateOrConnectWithoutOwnerInput = {
@@ -6807,18 +6807,18 @@ export namespace Prisma {
 
   export type UserCreateWithoutLogsInput = {
     id?: string
-    name?: string | null
+    name?: string
     email: string
-    password: string
+    password?: string | null
     Summary?: SummaryCreateNestedManyWithoutOwnerInput
     notification?: NotificationCreateNestedOneWithoutOwnerInput
   }
 
   export type UserUncheckedCreateWithoutLogsInput = {
     id?: string
-    name?: string | null
+    name?: string
     email: string
-    password: string
+    password?: string | null
     Summary?: SummaryUncheckedCreateNestedManyWithoutOwnerInput
     notification?: NotificationUncheckedCreateNestedOneWithoutOwnerInput
   }
@@ -6841,36 +6841,36 @@ export namespace Prisma {
 
   export type UserUpdateWithoutLogsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
     Summary?: SummaryUpdateManyWithoutOwnerNestedInput
     notification?: NotificationUpdateOneWithoutOwnerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutLogsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
     Summary?: SummaryUncheckedUpdateManyWithoutOwnerNestedInput
     notification?: NotificationUncheckedUpdateOneWithoutOwnerNestedInput
   }
 
   export type UserCreateWithoutSummaryInput = {
     id?: string
-    name?: string | null
+    name?: string
     email: string
-    password: string
+    password?: string | null
     logs?: LogCreateNestedManyWithoutOwnerInput
     notification?: NotificationCreateNestedOneWithoutOwnerInput
   }
 
   export type UserUncheckedCreateWithoutSummaryInput = {
     id?: string
-    name?: string | null
+    name?: string
     email: string
-    password: string
+    password?: string | null
     logs?: LogUncheckedCreateNestedManyWithoutOwnerInput
     notification?: NotificationUncheckedCreateNestedOneWithoutOwnerInput
   }
@@ -6893,36 +6893,36 @@ export namespace Prisma {
 
   export type UserUpdateWithoutSummaryInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
     logs?: LogUpdateManyWithoutOwnerNestedInput
     notification?: NotificationUpdateOneWithoutOwnerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSummaryInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
     logs?: LogUncheckedUpdateManyWithoutOwnerNestedInput
     notification?: NotificationUncheckedUpdateOneWithoutOwnerNestedInput
   }
 
   export type UserCreateWithoutNotificationInput = {
     id?: string
-    name?: string | null
+    name?: string
     email: string
-    password: string
+    password?: string | null
     logs?: LogCreateNestedManyWithoutOwnerInput
     Summary?: SummaryCreateNestedManyWithoutOwnerInput
   }
 
   export type UserUncheckedCreateWithoutNotificationInput = {
     id?: string
-    name?: string | null
+    name?: string
     email: string
-    password: string
+    password?: string | null
     logs?: LogUncheckedCreateNestedManyWithoutOwnerInput
     Summary?: SummaryUncheckedCreateNestedManyWithoutOwnerInput
   }
@@ -6945,18 +6945,18 @@ export namespace Prisma {
 
   export type UserUpdateWithoutNotificationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
     logs?: LogUpdateManyWithoutOwnerNestedInput
     Summary?: SummaryUpdateManyWithoutOwnerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutNotificationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
     logs?: LogUncheckedUpdateManyWithoutOwnerNestedInput
     Summary?: SummaryUncheckedUpdateManyWithoutOwnerNestedInput
   }
@@ -6971,7 +6971,7 @@ export namespace Prisma {
     content: string
     isProductive: boolean
     format: $Enums.SummaryFormat
-    createdAt: Date | string
+    createdAt?: Date | string
   }
 
   export type LogUpdateWithoutOwnerInput = {

@@ -10,9 +10,9 @@ datasource db {
 
 model User {
   id           String        @id @default(cuid())
-  name         String?
+  name         String        @default("")
   email        String        @unique
-  password     String
+  password     String?
   logs         Log[]
   Summary      Summary[]
   notification Notification?
@@ -30,7 +30,7 @@ model Summary {
   content      String
   isProductive Boolean
   format       SummaryFormat
-  createdAt    DateTime
+  createdAt    DateTime      @default(now())
   ownerId      String
   owner        User          @relation(fields: [ownerId], references: [id])
 }

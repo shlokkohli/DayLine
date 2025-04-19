@@ -1,0 +1,13 @@
+/*
+  Warnings:
+
+  - Made the column `name` on table `User` required. This step will fail if there are existing NULL values in that column.
+
+*/
+-- AlterTable
+ALTER TABLE "Summary" ALTER COLUMN "createdAt" SET DEFAULT CURRENT_TIMESTAMP;
+
+-- AlterTable
+ALTER TABLE "User" ALTER COLUMN "name" SET NOT NULL,
+ALTER COLUMN "name" SET DEFAULT '',
+ALTER COLUMN "password" DROP NOT NULL;
