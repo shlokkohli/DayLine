@@ -6,12 +6,12 @@ export async function POST(request : Request) {
 
     try {
 
-        const {email, password} = await request.json();
+        const {name, email, password} = await request.json();
 
         // check if email of password are missing
-        if(!email || !password){
+        if(!name || !email || !password){
             return NextResponse.json(
-                { message: 'Missing email or password' },
+                { message: 'Missing fields' },
                 { status: 400 }
             )
         }
@@ -36,11 +36,13 @@ export async function POST(request : Request) {
         // if the user does not exist, create new user in the database
         const user = await prisma.user.create({
             data: {
+                name,
                 email,
                 password : hashedPassword
             },
             select: {
                 id: true,
+                name: true,
                 email: true
             }
         })

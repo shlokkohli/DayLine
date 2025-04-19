@@ -10,7 +10,14 @@ export const authOptions: NextAuthOptions = {
     providers: [
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID!,
-            clientSecret: process.env.GOOGLE_CLIENT_SECRET!
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+            profile(profile) {
+                return {
+                    id: profile.sub,
+                    email: profile.email,
+                    name: profile.name,
+                }
+            }
         }),
         CredentialsProvider({
             id: 'credentials',
@@ -34,6 +41,8 @@ export const authOptions: NextAuthOptions = {
                         },
                     })
 
+                    console.log("the error is here: ", user)
+
                     if(!user){
                         throw new Error("User not found with this email")
                     }
@@ -43,7 +52,7 @@ export const authOptions: NextAuthOptions = {
                     }
 
                     // compare the password, (credentials password with user password)
-                    const isPasswordCorrect = bcrypt.compare(credentials.password, user.password)
+                    const isPasswordCorrect = await bcrypt.compare(credentials.password, user.password)
 
                     if(!isPasswordCorrect){
                         throw new Error("Incorrect password");
@@ -79,33 +88,43 @@ export const authOptions: NextAuthOptions = {
 
             return session;
         },
-        async signIn({account, user}) {
-            // check if the user is signing up with google for the first time
-            if(account?.provider === 'google' && user){
-                // check for the user in the database
+        async signIn({ account, profile }) {
+            if (!profile?.email) {
+                throw new Error("No profile")
+            }
+
+            try {
+                // Check if user exists
                 const existingUser = await prisma.user.findUnique({
                     where: {
-                        email: user.email
+                        email: profile.email
                     }
                 })
 
-                // if there is no existing user, create the user
-                if(!existingUser){
-                    await prisma.user.create({
-                        data: {
-                            email: user.email
-                        }
-                    })
+                if (existingUser) {
+                    return true // Allow sign in if user exists
                 }
-            }
 
-            return true;
-        },
+                // Create new user if they don't exist
+                await prisma.user.create({
+                    data: {
+                        email: profile.email,
+                        name: profile.name || ''
+                    }
+                })
+
+                return true
+            } catch (error) {
+                console.error("Error in signIn callback:", error)
+                return false
+            }
+        }
     },
     pages: {
         signIn: '/sign-in'
     },
     session: {
         strategy: 'jwt'
-    }
+    },
+    secret: process.env.NEXTAUTH_SECRET
 }
