@@ -1,6 +1,5 @@
 'use client'
 import { signIn } from 'next-auth/react'
-import { useSession } from 'next-auth/react'
 
 const SignUp = () => {
 
@@ -17,10 +16,6 @@ const SignUp = () => {
       
     }
   }
-
-  const { data: session } = useSession();
-
-  console.log("This is the session", session)
 
   return (
     <div className='max-w-full max-h-full flex justify-center items-center'>

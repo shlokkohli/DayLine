@@ -11,13 +11,6 @@ export const authOptions: NextAuthOptions = {
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID!,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-            profile(profile) {
-                return {
-                    id: profile.sub,
-                    email: profile.email,
-                    name: profile.name,
-                }
-            }
         }),
         CredentialsProvider({
             id: 'credentials',
@@ -40,8 +33,6 @@ export const authOptions: NextAuthOptions = {
                             email
                         },
                     })
-
-                    console.log("the error is here: ", user)
 
                     if(!user){
                         throw new Error("User not found with this email")
@@ -70,24 +61,25 @@ export const authOptions: NextAuthOptions = {
         }),
     ],
     callbacks: {
-        async jwt({ user, token }){
+        async jwt ({ user, token }){
             if(user){
                 token.email = user.email
-                token.name = user.name || ''
+                token.name = user.name,
                 token.id = user.id
             }
 
             return token;
         },
-        async session({ session, token }){
+
+        async session ({session, token}){
             if(token){
                 session.user.email = token.email
-                session.user.name = token.name || ''
+                session.user.name = token.name,
                 session.user.id = token.id
             }
-
             return session;
         },
+
         async signIn({ account, profile }) {
             if (!profile?.email) {
                 throw new Error("No profile")
