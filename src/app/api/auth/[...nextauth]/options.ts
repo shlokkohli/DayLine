@@ -1,12 +1,10 @@
 import { prisma } from "@/lib/prisma";
-import { PrismaAdapter } from '@next-auth/prisma-adapter'
 import bcrypt from "bcryptjs";
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 
 export const authOptions: NextAuthOptions = {
-    adapter: PrismaAdapter(prisma),
     providers: [
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID!,
@@ -81,34 +79,37 @@ export const authOptions: NextAuthOptions = {
         },
 
         async signIn({ account, profile }) {
-            if (!profile?.email) {
-                throw new Error("No profile")
-            }
 
             try {
-                // Check if user exists
-                const existingUser = await prisma.user.findUnique({
-                    where: {
-                        email: profile.email
-                    }
-                })
 
-                if (existingUser) {
-                    return true // Allow sign in if user exists
+                if(account?.provider === 'google'){
+                    // check if the user exist in the database
+                    const existingUser = await prisma.user.findUnique({
+                        where: {
+                            email: profile?.email
+                        }
+                    })
+
+                    // if does not exist create  manually
+                    if(!existingUser){
+                        const user = await prisma.user.create({
+                            data: {
+                                id: profile?.sub,
+                                email: profile?.email as string,
+                                name: profile?.name as string
+                            }
+                        })
+                        console.log("this is the user:", user)
+                    }
                 }
 
-                // Create new user if they don't exist
-                await prisma.user.create({
-                    data: {
-                        email: profile.email,
-                        name: profile.name || ''
-                    }
-                })
-
-                return true
+                return true;
+                
             } catch (error) {
+
                 console.error("Error in signIn callback:", error)
                 return false
+                
             }
         }
     },
