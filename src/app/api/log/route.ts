@@ -42,7 +42,7 @@ export async function POST(request: Request){
     } catch (error) {
 
         return NextResponse.json(
-            { message: "Error saving log" },
+            { message: "Error saving log", error },
             { status: 500 }
         )
         
