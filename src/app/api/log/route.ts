@@ -34,6 +34,8 @@ export async function POST(request: Request){
             }
         })
 
+        console.log(log.createdAt.toLocaleString())
+
         return NextResponse.json(
             { message: "Log saved", log },
             { status: 200 }
