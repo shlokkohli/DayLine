@@ -2331,12 +2331,14 @@ export namespace Prisma {
 
   export type LogMinAggregateOutputType = {
     id: string | null
+    content: string | null
     createdAt: Date | null
     ownerId: string | null
   }
 
   export type LogMaxAggregateOutputType = {
     id: string | null
+    content: string | null
     createdAt: Date | null
     ownerId: string | null
   }
@@ -2352,12 +2354,14 @@ export namespace Prisma {
 
   export type LogMinAggregateInputType = {
     id?: true
+    content?: true
     createdAt?: true
     ownerId?: true
   }
 
   export type LogMaxAggregateInputType = {
     id?: true
+    content?: true
     createdAt?: true
     ownerId?: true
   }
@@ -2444,7 +2448,7 @@ export namespace Prisma {
 
   export type LogGroupByOutputType = {
     id: string
-    content: string[]
+    content: string
     createdAt: Date
     ownerId: string
     _count: LogCountAggregateOutputType | null
@@ -2515,7 +2519,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      content: string[]
+      content: string
       createdAt: Date
       ownerId: string
     }, ExtArgs["result"]["log"]>
@@ -2943,7 +2947,7 @@ export namespace Prisma {
    */
   interface LogFieldRefs {
     readonly id: FieldRef<"Log", 'String'>
-    readonly content: FieldRef<"Log", 'String[]'>
+    readonly content: FieldRef<"Log", 'String'>
     readonly createdAt: FieldRef<"Log", 'DateTime'>
     readonly ownerId: FieldRef<"Log", 'String'>
   }
@@ -5698,7 +5702,7 @@ export namespace Prisma {
     OR?: LogWhereInput[]
     NOT?: LogWhereInput | LogWhereInput[]
     id?: StringFilter<"Log"> | string
-    content?: StringNullableListFilter<"Log">
+    content?: StringFilter<"Log"> | string
     createdAt?: DateTimeFilter<"Log"> | Date | string
     ownerId?: StringFilter<"Log"> | string
     owner?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -5717,7 +5721,7 @@ export namespace Prisma {
     AND?: LogWhereInput | LogWhereInput[]
     OR?: LogWhereInput[]
     NOT?: LogWhereInput | LogWhereInput[]
-    content?: StringNullableListFilter<"Log">
+    content?: StringFilter<"Log"> | string
     createdAt?: DateTimeFilter<"Log"> | Date | string
     ownerId?: StringFilter<"Log"> | string
     owner?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -5738,7 +5742,7 @@ export namespace Prisma {
     OR?: LogScalarWhereWithAggregatesInput[]
     NOT?: LogScalarWhereWithAggregatesInput | LogScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Log"> | string
-    content?: StringNullableListFilter<"Log">
+    content?: StringWithAggregatesFilter<"Log"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Log"> | Date | string
     ownerId?: StringWithAggregatesFilter<"Log"> | string
   }
@@ -5916,48 +5920,48 @@ export namespace Prisma {
 
   export type LogCreateInput = {
     id?: string
-    content?: LogCreatecontentInput | string[]
+    content: string
     createdAt?: Date | string
     owner: UserCreateNestedOneWithoutLogsInput
   }
 
   export type LogUncheckedCreateInput = {
     id?: string
-    content?: LogCreatecontentInput | string[]
+    content: string
     createdAt?: Date | string
     ownerId: string
   }
 
   export type LogUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    content?: LogUpdatecontentInput | string[]
+    content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     owner?: UserUpdateOneRequiredWithoutLogsNestedInput
   }
 
   export type LogUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    content?: LogUpdatecontentInput | string[]
+    content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
   }
 
   export type LogCreateManyInput = {
     id?: string
-    content?: LogCreatecontentInput | string[]
+    content: string
     createdAt?: Date | string
     ownerId: string
   }
 
   export type LogUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    content?: LogUpdatecontentInput | string[]
+    content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type LogUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    content?: LogUpdatecontentInput | string[]
+    content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
   }
@@ -6189,14 +6193,6 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
-  export type StringNullableListFilter<$PrismaModel = never> = {
-    equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    has?: string | StringFieldRefInput<$PrismaModel> | null
-    hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
-    hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
-    isEmpty?: boolean
-  }
-
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -6222,12 +6218,14 @@ export namespace Prisma {
 
   export type LogMaxOrderByAggregateInput = {
     id?: SortOrder
+    content?: SortOrder
     createdAt?: SortOrder
     ownerId?: SortOrder
   }
 
   export type LogMinOrderByAggregateInput = {
     id?: SortOrder
+    content?: SortOrder
     createdAt?: SortOrder
     ownerId?: SortOrder
   }
@@ -6308,6 +6306,14 @@ export namespace Prisma {
     in?: $Enums.NotificationTime[] | ListEnumNotificationTimeFieldRefInput<$PrismaModel>
     notIn?: $Enums.NotificationTime[] | ListEnumNotificationTimeFieldRefInput<$PrismaModel>
     not?: NestedEnumNotificationTimeFilter<$PrismaModel> | $Enums.NotificationTime
+  }
+
+  export type StringNullableListFilter<$PrismaModel = never> = {
+    equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    has?: string | StringFieldRefInput<$PrismaModel> | null
+    hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
+    hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
   }
 
   export type NotificationCountOrderByAggregateInput = {
@@ -6463,19 +6469,10 @@ export namespace Prisma {
     update?: XOR<XOR<NotificationUpdateToOneWithWhereWithoutOwnerInput, NotificationUpdateWithoutOwnerInput>, NotificationUncheckedUpdateWithoutOwnerInput>
   }
 
-  export type LogCreatecontentInput = {
-    set: string[]
-  }
-
   export type UserCreateNestedOneWithoutLogsInput = {
     create?: XOR<UserCreateWithoutLogsInput, UserUncheckedCreateWithoutLogsInput>
     connectOrCreate?: UserCreateOrConnectWithoutLogsInput
     connect?: UserWhereUniqueInput
-  }
-
-  export type LogUpdatecontentInput = {
-    set?: string[]
-    push?: string | string[]
   }
 
   export type DateTimeFieldUpdateOperationsInput = {
@@ -6697,13 +6694,13 @@ export namespace Prisma {
 
   export type LogCreateWithoutOwnerInput = {
     id?: string
-    content?: LogCreatecontentInput | string[]
+    content: string
     createdAt?: Date | string
   }
 
   export type LogUncheckedCreateWithoutOwnerInput = {
     id?: string
-    content?: LogCreatecontentInput | string[]
+    content: string
     createdAt?: Date | string
   }
 
@@ -6781,7 +6778,7 @@ export namespace Prisma {
     OR?: LogScalarWhereInput[]
     NOT?: LogScalarWhereInput | LogScalarWhereInput[]
     id?: StringFilter<"Log"> | string
-    content?: StringNullableListFilter<"Log">
+    content?: StringFilter<"Log"> | string
     createdAt?: DateTimeFilter<"Log"> | Date | string
     ownerId?: StringFilter<"Log"> | string
   }
@@ -6995,7 +6992,7 @@ export namespace Prisma {
 
   export type LogCreateManyOwnerInput = {
     id?: string
-    content?: LogCreatecontentInput | string[]
+    content: string
     createdAt?: Date | string
   }
 
@@ -7009,19 +7006,19 @@ export namespace Prisma {
 
   export type LogUpdateWithoutOwnerInput = {
     id?: StringFieldUpdateOperationsInput | string
-    content?: LogUpdatecontentInput | string[]
+    content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type LogUncheckedUpdateWithoutOwnerInput = {
     id?: StringFieldUpdateOperationsInput | string
-    content?: LogUpdatecontentInput | string[]
+    content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type LogUncheckedUpdateManyWithoutOwnerInput = {
     id?: StringFieldUpdateOperationsInput | string
-    content?: LogUpdatecontentInput | string[]
+    content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
