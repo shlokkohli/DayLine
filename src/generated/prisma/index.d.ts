@@ -48,8 +48,7 @@ export type SummaryFormat = (typeof SummaryFormat)[keyof typeof SummaryFormat]
 
 export const NotificationTime: {
   ManuallyEnter: 'ManuallyEnter',
-  SpecificTimes: 'SpecificTimes',
-  CustomTimes: 'CustomTimes'
+  SpecificTimes: 'SpecificTimes'
 };
 
 export type NotificationTime = (typeof NotificationTime)[keyof typeof NotificationTime]
@@ -4460,7 +4459,6 @@ export namespace Prisma {
   export type NotificationCountAggregateOutputType = {
     id: number
     NotificationTime: number
-    CustomMinutes: number
     ownerId: number
     _all: number
   }
@@ -4481,7 +4479,6 @@ export namespace Prisma {
   export type NotificationCountAggregateInputType = {
     id?: true
     NotificationTime?: true
-    CustomMinutes?: true
     ownerId?: true
     _all?: true
   }
@@ -4561,7 +4558,6 @@ export namespace Prisma {
   export type NotificationGroupByOutputType = {
     id: string
     NotificationTime: $Enums.NotificationTime
-    CustomMinutes: string[]
     ownerId: string
     _count: NotificationCountAggregateOutputType | null
     _min: NotificationMinAggregateOutputType | null
@@ -4585,7 +4581,6 @@ export namespace Prisma {
   export type NotificationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     NotificationTime?: boolean
-    CustomMinutes?: boolean
     ownerId?: boolean
     owner?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["notification"]>
@@ -4593,7 +4588,6 @@ export namespace Prisma {
   export type NotificationSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     NotificationTime?: boolean
-    CustomMinutes?: boolean
     ownerId?: boolean
     owner?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["notification"]>
@@ -4601,7 +4595,6 @@ export namespace Prisma {
   export type NotificationSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     NotificationTime?: boolean
-    CustomMinutes?: boolean
     ownerId?: boolean
     owner?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["notification"]>
@@ -4609,11 +4602,10 @@ export namespace Prisma {
   export type NotificationSelectScalar = {
     id?: boolean
     NotificationTime?: boolean
-    CustomMinutes?: boolean
     ownerId?: boolean
   }
 
-  export type NotificationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "NotificationTime" | "CustomMinutes" | "ownerId", ExtArgs["result"]["notification"]>
+  export type NotificationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "NotificationTime" | "ownerId", ExtArgs["result"]["notification"]>
   export type NotificationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     owner?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -4632,7 +4624,6 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       NotificationTime: $Enums.NotificationTime
-      CustomMinutes: string[]
       ownerId: string
     }, ExtArgs["result"]["notification"]>
     composites: {}
@@ -5060,7 +5051,6 @@ export namespace Prisma {
   interface NotificationFieldRefs {
     readonly id: FieldRef<"Notification", 'String'>
     readonly NotificationTime: FieldRef<"Notification", 'NotificationTime'>
-    readonly CustomMinutes: FieldRef<"Notification", 'String[]'>
     readonly ownerId: FieldRef<"Notification", 'String'>
   }
     
@@ -5525,7 +5515,6 @@ export namespace Prisma {
   export const NotificationScalarFieldEnum: {
     id: 'id',
     NotificationTime: 'NotificationTime',
-    CustomMinutes: 'CustomMinutes',
     ownerId: 'ownerId'
   };
 
@@ -5813,7 +5802,6 @@ export namespace Prisma {
     NOT?: NotificationWhereInput | NotificationWhereInput[]
     id?: StringFilter<"Notification"> | string
     NotificationTime?: EnumNotificationTimeFilter<"Notification"> | $Enums.NotificationTime
-    CustomMinutes?: StringNullableListFilter<"Notification">
     ownerId?: StringFilter<"Notification"> | string
     owner?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
@@ -5821,7 +5809,6 @@ export namespace Prisma {
   export type NotificationOrderByWithRelationInput = {
     id?: SortOrder
     NotificationTime?: SortOrder
-    CustomMinutes?: SortOrder
     ownerId?: SortOrder
     owner?: UserOrderByWithRelationInput
   }
@@ -5833,14 +5820,12 @@ export namespace Prisma {
     OR?: NotificationWhereInput[]
     NOT?: NotificationWhereInput | NotificationWhereInput[]
     NotificationTime?: EnumNotificationTimeFilter<"Notification"> | $Enums.NotificationTime
-    CustomMinutes?: StringNullableListFilter<"Notification">
     owner?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id" | "ownerId">
 
   export type NotificationOrderByWithAggregationInput = {
     id?: SortOrder
     NotificationTime?: SortOrder
-    CustomMinutes?: SortOrder
     ownerId?: SortOrder
     _count?: NotificationCountOrderByAggregateInput
     _max?: NotificationMaxOrderByAggregateInput
@@ -5853,7 +5838,6 @@ export namespace Prisma {
     NOT?: NotificationScalarWhereWithAggregatesInput | NotificationScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Notification"> | string
     NotificationTime?: EnumNotificationTimeWithAggregatesFilter<"Notification"> | $Enums.NotificationTime
-    CustomMinutes?: StringNullableListFilter<"Notification">
     ownerId?: StringWithAggregatesFilter<"Notification"> | string
   }
 
@@ -6031,48 +6015,41 @@ export namespace Prisma {
   export type NotificationCreateInput = {
     id?: string
     NotificationTime: $Enums.NotificationTime
-    CustomMinutes?: NotificationCreateCustomMinutesInput | string[]
     owner: UserCreateNestedOneWithoutNotificationInput
   }
 
   export type NotificationUncheckedCreateInput = {
     id?: string
     NotificationTime: $Enums.NotificationTime
-    CustomMinutes?: NotificationCreateCustomMinutesInput | string[]
     ownerId: string
   }
 
   export type NotificationUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     NotificationTime?: EnumNotificationTimeFieldUpdateOperationsInput | $Enums.NotificationTime
-    CustomMinutes?: NotificationUpdateCustomMinutesInput | string[]
     owner?: UserUpdateOneRequiredWithoutNotificationNestedInput
   }
 
   export type NotificationUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     NotificationTime?: EnumNotificationTimeFieldUpdateOperationsInput | $Enums.NotificationTime
-    CustomMinutes?: NotificationUpdateCustomMinutesInput | string[]
     ownerId?: StringFieldUpdateOperationsInput | string
   }
 
   export type NotificationCreateManyInput = {
     id?: string
     NotificationTime: $Enums.NotificationTime
-    CustomMinutes?: NotificationCreateCustomMinutesInput | string[]
     ownerId: string
   }
 
   export type NotificationUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     NotificationTime?: EnumNotificationTimeFieldUpdateOperationsInput | $Enums.NotificationTime
-    CustomMinutes?: NotificationUpdateCustomMinutesInput | string[]
   }
 
   export type NotificationUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     NotificationTime?: EnumNotificationTimeFieldUpdateOperationsInput | $Enums.NotificationTime
-    CustomMinutes?: NotificationUpdateCustomMinutesInput | string[]
     ownerId?: StringFieldUpdateOperationsInput | string
   }
 
@@ -6308,18 +6285,9 @@ export namespace Prisma {
     not?: NestedEnumNotificationTimeFilter<$PrismaModel> | $Enums.NotificationTime
   }
 
-  export type StringNullableListFilter<$PrismaModel = never> = {
-    equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    has?: string | StringFieldRefInput<$PrismaModel> | null
-    hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
-    hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
-    isEmpty?: boolean
-  }
-
   export type NotificationCountOrderByAggregateInput = {
     id?: SortOrder
     NotificationTime?: SortOrder
-    CustomMinutes?: SortOrder
     ownerId?: SortOrder
   }
 
@@ -6509,10 +6477,6 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutSummaryInput, UserUpdateWithoutSummaryInput>, UserUncheckedUpdateWithoutSummaryInput>
   }
 
-  export type NotificationCreateCustomMinutesInput = {
-    set: string[]
-  }
-
   export type UserCreateNestedOneWithoutNotificationInput = {
     create?: XOR<UserCreateWithoutNotificationInput, UserUncheckedCreateWithoutNotificationInput>
     connectOrCreate?: UserCreateOrConnectWithoutNotificationInput
@@ -6521,11 +6485,6 @@ export namespace Prisma {
 
   export type EnumNotificationTimeFieldUpdateOperationsInput = {
     set?: $Enums.NotificationTime
-  }
-
-  export type NotificationUpdateCustomMinutesInput = {
-    set?: string[]
-    push?: string | string[]
   }
 
   export type UserUpdateOneRequiredWithoutNotificationNestedInput = {
@@ -6743,13 +6702,11 @@ export namespace Prisma {
   export type NotificationCreateWithoutOwnerInput = {
     id?: string
     NotificationTime: $Enums.NotificationTime
-    CustomMinutes?: NotificationCreateCustomMinutesInput | string[]
   }
 
   export type NotificationUncheckedCreateWithoutOwnerInput = {
     id?: string
     NotificationTime: $Enums.NotificationTime
-    CustomMinutes?: NotificationCreateCustomMinutesInput | string[]
   }
 
   export type NotificationCreateOrConnectWithoutOwnerInput = {
@@ -6825,13 +6782,11 @@ export namespace Prisma {
   export type NotificationUpdateWithoutOwnerInput = {
     id?: StringFieldUpdateOperationsInput | string
     NotificationTime?: EnumNotificationTimeFieldUpdateOperationsInput | $Enums.NotificationTime
-    CustomMinutes?: NotificationUpdateCustomMinutesInput | string[]
   }
 
   export type NotificationUncheckedUpdateWithoutOwnerInput = {
     id?: StringFieldUpdateOperationsInput | string
     NotificationTime?: EnumNotificationTimeFieldUpdateOperationsInput | $Enums.NotificationTime
-    CustomMinutes?: NotificationUpdateCustomMinutesInput | string[]
   }
 
   export type UserCreateWithoutLogsInput = {

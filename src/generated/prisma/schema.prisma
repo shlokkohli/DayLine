@@ -44,7 +44,6 @@ enum SummaryFormat {
 model Notification {
   id               String           @id @default(cuid())
   NotificationTime NotificationTime
-  CustomMinutes    String[]         @default([])
   ownerId          String           @unique
   owner            User             @relation(fields: [ownerId], references: [id])
 }
@@ -52,5 +51,4 @@ model Notification {
 enum NotificationTime {
   ManuallyEnter
   SpecificTimes
-  CustomTimes
 }

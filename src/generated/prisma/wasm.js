@@ -143,7 +143,6 @@ exports.Prisma.SummaryScalarFieldEnum = {
 exports.Prisma.NotificationScalarFieldEnum = {
   id: 'id',
   NotificationTime: 'NotificationTime',
-  CustomMinutes: 'CustomMinutes',
   ownerId: 'ownerId'
 };
 
@@ -168,8 +167,7 @@ exports.SummaryFormat = exports.$Enums.SummaryFormat = {
 
 exports.NotificationTime = exports.$Enums.NotificationTime = {
   ManuallyEnter: 'ManuallyEnter',
-  SpecificTimes: 'SpecificTimes',
-  CustomTimes: 'CustomTimes'
+  SpecificTimes: 'SpecificTimes'
 };
 
 exports.Prisma.ModelName = {
