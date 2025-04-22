@@ -127,6 +127,7 @@ exports.Prisma.UserScalarFieldEnum = {
 exports.Prisma.LogScalarFieldEnum = {
   id: 'id',
   content: 'content',
+  createdAt: 'createdAt',
   ownerId: 'ownerId'
 };
 

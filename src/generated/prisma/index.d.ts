@@ -2331,17 +2331,20 @@ export namespace Prisma {
 
   export type LogMinAggregateOutputType = {
     id: string | null
+    createdAt: Date | null
     ownerId: string | null
   }
 
   export type LogMaxAggregateOutputType = {
     id: string | null
+    createdAt: Date | null
     ownerId: string | null
   }
 
   export type LogCountAggregateOutputType = {
     id: number
     content: number
+    createdAt: number
     ownerId: number
     _all: number
   }
@@ -2349,17 +2352,20 @@ export namespace Prisma {
 
   export type LogMinAggregateInputType = {
     id?: true
+    createdAt?: true
     ownerId?: true
   }
 
   export type LogMaxAggregateInputType = {
     id?: true
+    createdAt?: true
     ownerId?: true
   }
 
   export type LogCountAggregateInputType = {
     id?: true
     content?: true
+    createdAt?: true
     ownerId?: true
     _all?: true
   }
@@ -2439,6 +2445,7 @@ export namespace Prisma {
   export type LogGroupByOutputType = {
     id: string
     content: string[]
+    createdAt: Date
     ownerId: string
     _count: LogCountAggregateOutputType | null
     _min: LogMinAggregateOutputType | null
@@ -2462,6 +2469,7 @@ export namespace Prisma {
   export type LogSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     content?: boolean
+    createdAt?: boolean
     ownerId?: boolean
     owner?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["log"]>
@@ -2469,6 +2477,7 @@ export namespace Prisma {
   export type LogSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     content?: boolean
+    createdAt?: boolean
     ownerId?: boolean
     owner?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["log"]>
@@ -2476,6 +2485,7 @@ export namespace Prisma {
   export type LogSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     content?: boolean
+    createdAt?: boolean
     ownerId?: boolean
     owner?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["log"]>
@@ -2483,10 +2493,11 @@ export namespace Prisma {
   export type LogSelectScalar = {
     id?: boolean
     content?: boolean
+    createdAt?: boolean
     ownerId?: boolean
   }
 
-  export type LogOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "content" | "ownerId", ExtArgs["result"]["log"]>
+  export type LogOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "content" | "createdAt" | "ownerId", ExtArgs["result"]["log"]>
   export type LogInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     owner?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -2505,6 +2516,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       content: string[]
+      createdAt: Date
       ownerId: string
     }, ExtArgs["result"]["log"]>
     composites: {}
@@ -2932,6 +2944,7 @@ export namespace Prisma {
   interface LogFieldRefs {
     readonly id: FieldRef<"Log", 'String'>
     readonly content: FieldRef<"Log", 'String[]'>
+    readonly createdAt: FieldRef<"Log", 'DateTime'>
     readonly ownerId: FieldRef<"Log", 'String'>
   }
     
@@ -5486,6 +5499,7 @@ export namespace Prisma {
   export const LogScalarFieldEnum: {
     id: 'id',
     content: 'content',
+    createdAt: 'createdAt',
     ownerId: 'ownerId'
   };
 
@@ -5558,6 +5572,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'DateTime'
+   */
+  export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
+    
+
+
+  /**
+   * Reference to a field of type 'DateTime[]'
+   */
+  export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Boolean'
    */
   export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
@@ -5575,20 +5603,6 @@ export namespace Prisma {
    * Reference to a field of type 'SummaryFormat[]'
    */
   export type ListEnumSummaryFormatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SummaryFormat[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'DateTime'
-   */
-  export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
-    
-
-
-  /**
-   * Reference to a field of type 'DateTime[]'
-   */
-  export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
     
 
 
@@ -5685,6 +5699,7 @@ export namespace Prisma {
     NOT?: LogWhereInput | LogWhereInput[]
     id?: StringFilter<"Log"> | string
     content?: StringNullableListFilter<"Log">
+    createdAt?: DateTimeFilter<"Log"> | Date | string
     ownerId?: StringFilter<"Log"> | string
     owner?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
@@ -5692,6 +5707,7 @@ export namespace Prisma {
   export type LogOrderByWithRelationInput = {
     id?: SortOrder
     content?: SortOrder
+    createdAt?: SortOrder
     ownerId?: SortOrder
     owner?: UserOrderByWithRelationInput
   }
@@ -5702,6 +5718,7 @@ export namespace Prisma {
     OR?: LogWhereInput[]
     NOT?: LogWhereInput | LogWhereInput[]
     content?: StringNullableListFilter<"Log">
+    createdAt?: DateTimeFilter<"Log"> | Date | string
     ownerId?: StringFilter<"Log"> | string
     owner?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
@@ -5709,6 +5726,7 @@ export namespace Prisma {
   export type LogOrderByWithAggregationInput = {
     id?: SortOrder
     content?: SortOrder
+    createdAt?: SortOrder
     ownerId?: SortOrder
     _count?: LogCountOrderByAggregateInput
     _max?: LogMaxOrderByAggregateInput
@@ -5721,6 +5739,7 @@ export namespace Prisma {
     NOT?: LogScalarWhereWithAggregatesInput | LogScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Log"> | string
     content?: StringNullableListFilter<"Log">
+    createdAt?: DateTimeWithAggregatesFilter<"Log"> | Date | string
     ownerId?: StringWithAggregatesFilter<"Log"> | string
   }
 
@@ -5898,41 +5917,48 @@ export namespace Prisma {
   export type LogCreateInput = {
     id?: string
     content?: LogCreatecontentInput | string[]
+    createdAt?: Date | string
     owner: UserCreateNestedOneWithoutLogsInput
   }
 
   export type LogUncheckedCreateInput = {
     id?: string
     content?: LogCreatecontentInput | string[]
+    createdAt?: Date | string
     ownerId: string
   }
 
   export type LogUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     content?: LogUpdatecontentInput | string[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     owner?: UserUpdateOneRequiredWithoutLogsNestedInput
   }
 
   export type LogUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     content?: LogUpdatecontentInput | string[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
   }
 
   export type LogCreateManyInput = {
     id?: string
     content?: LogCreatecontentInput | string[]
+    createdAt?: Date | string
     ownerId: string
   }
 
   export type LogUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     content?: LogUpdatecontentInput | string[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type LogUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     content?: LogUpdatecontentInput | string[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
   }
 
@@ -6171,6 +6197,17 @@ export namespace Prisma {
     isEmpty?: boolean
   }
 
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
   export type UserScalarRelationFilter = {
     is?: UserWhereInput
     isNot?: UserWhereInput
@@ -6179,17 +6216,34 @@ export namespace Prisma {
   export type LogCountOrderByAggregateInput = {
     id?: SortOrder
     content?: SortOrder
+    createdAt?: SortOrder
     ownerId?: SortOrder
   }
 
   export type LogMaxOrderByAggregateInput = {
     id?: SortOrder
+    createdAt?: SortOrder
     ownerId?: SortOrder
   }
 
   export type LogMinOrderByAggregateInput = {
     id?: SortOrder
+    createdAt?: SortOrder
     ownerId?: SortOrder
+  }
+
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type BoolFilter<$PrismaModel = never> = {
@@ -6202,17 +6256,6 @@ export namespace Prisma {
     in?: $Enums.SummaryFormat[] | ListEnumSummaryFormatFieldRefInput<$PrismaModel>
     notIn?: $Enums.SummaryFormat[] | ListEnumSummaryFormatFieldRefInput<$PrismaModel>
     not?: NestedEnumSummaryFormatFilter<$PrismaModel> | $Enums.SummaryFormat
-  }
-
-  export type DateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
   export type SummaryCountOrderByAggregateInput = {
@@ -6258,20 +6301,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumSummaryFormatFilter<$PrismaModel>
     _max?: NestedEnumSummaryFormatFilter<$PrismaModel>
-  }
-
-  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type EnumNotificationTimeFilter<$PrismaModel = never> = {
@@ -6449,6 +6478,10 @@ export namespace Prisma {
     push?: string | string[]
   }
 
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
+  }
+
   export type UserUpdateOneRequiredWithoutLogsNestedInput = {
     create?: XOR<UserCreateWithoutLogsInput, UserUncheckedCreateWithoutLogsInput>
     connectOrCreate?: UserCreateOrConnectWithoutLogsInput
@@ -6469,10 +6502,6 @@ export namespace Prisma {
 
   export type EnumSummaryFormatFieldUpdateOperationsInput = {
     set?: $Enums.SummaryFormat
-  }
-
-  export type DateTimeFieldUpdateOperationsInput = {
-    set?: Date | string
   }
 
   export type UserUpdateOneRequiredWithoutSummaryNestedInput = {
@@ -6594,6 +6623,31 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
   export type NestedBoolFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
     not?: NestedBoolFilter<$PrismaModel> | boolean
@@ -6604,17 +6658,6 @@ export namespace Prisma {
     in?: $Enums.SummaryFormat[] | ListEnumSummaryFormatFieldRefInput<$PrismaModel>
     notIn?: $Enums.SummaryFormat[] | ListEnumSummaryFormatFieldRefInput<$PrismaModel>
     not?: NestedEnumSummaryFormatFilter<$PrismaModel> | $Enums.SummaryFormat
-  }
-
-  export type NestedDateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
   export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
@@ -6633,20 +6676,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumSummaryFormatFilter<$PrismaModel>
     _max?: NestedEnumSummaryFormatFilter<$PrismaModel>
-  }
-
-  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type NestedEnumNotificationTimeFilter<$PrismaModel = never> = {
@@ -6669,11 +6698,13 @@ export namespace Prisma {
   export type LogCreateWithoutOwnerInput = {
     id?: string
     content?: LogCreatecontentInput | string[]
+    createdAt?: Date | string
   }
 
   export type LogUncheckedCreateWithoutOwnerInput = {
     id?: string
     content?: LogCreatecontentInput | string[]
+    createdAt?: Date | string
   }
 
   export type LogCreateOrConnectWithoutOwnerInput = {
@@ -6751,6 +6782,7 @@ export namespace Prisma {
     NOT?: LogScalarWhereInput | LogScalarWhereInput[]
     id?: StringFilter<"Log"> | string
     content?: StringNullableListFilter<"Log">
+    createdAt?: DateTimeFilter<"Log"> | Date | string
     ownerId?: StringFilter<"Log"> | string
   }
 
@@ -6964,6 +6996,7 @@ export namespace Prisma {
   export type LogCreateManyOwnerInput = {
     id?: string
     content?: LogCreatecontentInput | string[]
+    createdAt?: Date | string
   }
 
   export type SummaryCreateManyOwnerInput = {
@@ -6977,16 +7010,19 @@ export namespace Prisma {
   export type LogUpdateWithoutOwnerInput = {
     id?: StringFieldUpdateOperationsInput | string
     content?: LogUpdatecontentInput | string[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type LogUncheckedUpdateWithoutOwnerInput = {
     id?: StringFieldUpdateOperationsInput | string
     content?: LogUpdatecontentInput | string[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type LogUncheckedUpdateManyWithoutOwnerInput = {
     id?: StringFieldUpdateOperationsInput | string
     content?: LogUpdatecontentInput | string[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type SummaryUpdateWithoutOwnerInput = {
