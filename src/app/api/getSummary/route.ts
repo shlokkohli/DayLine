@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 import { authOptions } from "../auth/[...nextauth]/options";
 import { prisma } from "@/lib/prisma";
 
-export async function POST(){
+export async function POST(request: Request){
 
     const session = await getServerSession(authOptions);
     if(!session?.user.id){
@@ -16,6 +16,15 @@ export async function POST(){
     }
 
     try {
+
+        const { format } = await request.json()
+
+        if(!format){
+            return NextResponse.json(
+                { message: "Invalid format. Please choose a format to generate the summary" },
+                { status: 400 }
+            )
+        }
 
         // i want that when we fetch the user data, it should be in this format, [time] [content]
 
@@ -41,7 +50,7 @@ export async function POST(){
 
         const customLogs = `User's journal entries:
         ${formattedLogs}
-        Generate a summary of the user's day in the "Segmented Summary" format.`
+        Generate a summary of the user's day in the ${format} format.`
 
         const response = await ai.models.generateContent({
             model: "gemini-2.0-flash",
@@ -51,7 +60,29 @@ export async function POST(){
             }
         })
 
-        const output = response.candidates?.[0].content?.parts?.[0]
+        const output = response.candidates?.[0].content?.parts?.[0] as string
+
+        const response2 = await ai.models.generateContent({
+            model: "gemini-2.0-flash",
+            contents: output,
+            config: {
+                systemInstruction: "You are going to get a user's day summary data an input and you are supposed to label it as productive or non productive. You are not supposed to be polite nor harsh, just be honest and tell the user if the day was productive or not, and make sure to strictly adhere to just true or false. If the day was productive, give a yes, otherwise no. Make sure to write yes or no in all small letters."
+            }
+        })
+
+        const productivityResponse = response2.candidates?.[0].content?.parts?.[0].text
+
+        const isProductive = productivityResponse === "yes";
+
+        // take this output and save it to the database
+        await prisma.summary.create({
+            data: {
+                ownerId: session.user.id,
+                content: output,
+                isProductive: isProductive,
+                format: format
+            }
+        })
 
         return NextResponse.json(
             { message: "Summary generated", output },
