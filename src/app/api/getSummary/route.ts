@@ -118,9 +118,6 @@ export async function POST(request: Request){
         await prisma.log.deleteMany({
             where: {
                 ownerId: session.user.id,
-                createdAt: {
-                    gte: startOfToday
-                }
             }
         })
 
