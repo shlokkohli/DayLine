@@ -26,6 +26,28 @@ export async function POST(request: Request){
             )
         }
 
+        // first get today's date
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        // check if a summary already exists for that day
+        const existingSummary = await prisma.summary.findUnique({
+            where: {
+                ownerId_date: {
+                    ownerId: session.user.id,
+                    date: today
+                }
+            }
+        })
+
+        // if summary already exists, do not give any summary
+        if(existingSummary){
+            return NextResponse.json(
+                { message: "Summary already exists for today" },
+                { status: 200 }
+            )
+        }
+
         // i want that when we fetch the user data, it should be in this format, [time] [content]
 
         // first fetch the current user's logs
@@ -80,7 +102,8 @@ export async function POST(request: Request){
                 ownerId: session.user.id,
                 content: output,
                 isProductive: isProductive,
-                format: format
+                format: format,
+                date: today
             }
         })
 

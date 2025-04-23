@@ -32,8 +32,11 @@ model Summary {
   isProductive Boolean
   format       SummaryFormat
   createdAt    DateTime      @default(now())
+  date         DateTime
   ownerId      String
   owner        User          @relation(fields: [ownerId], references: [id])
+
+  @@unique([ownerId, date])
 }
 
 enum SummaryFormat {

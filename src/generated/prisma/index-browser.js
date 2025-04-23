@@ -137,6 +137,7 @@ exports.Prisma.SummaryScalarFieldEnum = {
   isProductive: 'isProductive',
   format: 'format',
   createdAt: 'createdAt',
+  date: 'date',
   ownerId: 'ownerId'
 };
 

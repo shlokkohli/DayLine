@@ -3379,6 +3379,7 @@ export namespace Prisma {
     isProductive: boolean | null
     format: $Enums.SummaryFormat | null
     createdAt: Date | null
+    date: Date | null
     ownerId: string | null
   }
 
@@ -3388,6 +3389,7 @@ export namespace Prisma {
     isProductive: boolean | null
     format: $Enums.SummaryFormat | null
     createdAt: Date | null
+    date: Date | null
     ownerId: string | null
   }
 
@@ -3397,6 +3399,7 @@ export namespace Prisma {
     isProductive: number
     format: number
     createdAt: number
+    date: number
     ownerId: number
     _all: number
   }
@@ -3408,6 +3411,7 @@ export namespace Prisma {
     isProductive?: true
     format?: true
     createdAt?: true
+    date?: true
     ownerId?: true
   }
 
@@ -3417,6 +3421,7 @@ export namespace Prisma {
     isProductive?: true
     format?: true
     createdAt?: true
+    date?: true
     ownerId?: true
   }
 
@@ -3426,6 +3431,7 @@ export namespace Prisma {
     isProductive?: true
     format?: true
     createdAt?: true
+    date?: true
     ownerId?: true
     _all?: true
   }
@@ -3508,6 +3514,7 @@ export namespace Prisma {
     isProductive: boolean
     format: $Enums.SummaryFormat
     createdAt: Date
+    date: Date
     ownerId: string
     _count: SummaryCountAggregateOutputType | null
     _min: SummaryMinAggregateOutputType | null
@@ -3534,6 +3541,7 @@ export namespace Prisma {
     isProductive?: boolean
     format?: boolean
     createdAt?: boolean
+    date?: boolean
     ownerId?: boolean
     owner?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["summary"]>
@@ -3544,6 +3552,7 @@ export namespace Prisma {
     isProductive?: boolean
     format?: boolean
     createdAt?: boolean
+    date?: boolean
     ownerId?: boolean
     owner?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["summary"]>
@@ -3554,6 +3563,7 @@ export namespace Prisma {
     isProductive?: boolean
     format?: boolean
     createdAt?: boolean
+    date?: boolean
     ownerId?: boolean
     owner?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["summary"]>
@@ -3564,10 +3574,11 @@ export namespace Prisma {
     isProductive?: boolean
     format?: boolean
     createdAt?: boolean
+    date?: boolean
     ownerId?: boolean
   }
 
-  export type SummaryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "content" | "isProductive" | "format" | "createdAt" | "ownerId", ExtArgs["result"]["summary"]>
+  export type SummaryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "content" | "isProductive" | "format" | "createdAt" | "date" | "ownerId", ExtArgs["result"]["summary"]>
   export type SummaryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     owner?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -3589,6 +3600,7 @@ export namespace Prisma {
       isProductive: boolean
       format: $Enums.SummaryFormat
       createdAt: Date
+      date: Date
       ownerId: string
     }, ExtArgs["result"]["summary"]>
     composites: {}
@@ -4019,6 +4031,7 @@ export namespace Prisma {
     readonly isProductive: FieldRef<"Summary", 'Boolean'>
     readonly format: FieldRef<"Summary", 'SummaryFormat'>
     readonly createdAt: FieldRef<"Summary", 'DateTime'>
+    readonly date: FieldRef<"Summary", 'DateTime'>
     readonly ownerId: FieldRef<"Summary", 'String'>
   }
     
@@ -5506,6 +5519,7 @@ export namespace Prisma {
     isProductive: 'isProductive',
     format: 'format',
     createdAt: 'createdAt',
+    date: 'date',
     ownerId: 'ownerId'
   };
 
@@ -5745,6 +5759,7 @@ export namespace Prisma {
     isProductive?: BoolFilter<"Summary"> | boolean
     format?: EnumSummaryFormatFilter<"Summary"> | $Enums.SummaryFormat
     createdAt?: DateTimeFilter<"Summary"> | Date | string
+    date?: DateTimeFilter<"Summary"> | Date | string
     ownerId?: StringFilter<"Summary"> | string
     owner?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
@@ -5755,12 +5770,14 @@ export namespace Prisma {
     isProductive?: SortOrder
     format?: SortOrder
     createdAt?: SortOrder
+    date?: SortOrder
     ownerId?: SortOrder
     owner?: UserOrderByWithRelationInput
   }
 
   export type SummaryWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    ownerId_date?: SummaryOwnerIdDateCompoundUniqueInput
     AND?: SummaryWhereInput | SummaryWhereInput[]
     OR?: SummaryWhereInput[]
     NOT?: SummaryWhereInput | SummaryWhereInput[]
@@ -5768,9 +5785,10 @@ export namespace Prisma {
     isProductive?: BoolFilter<"Summary"> | boolean
     format?: EnumSummaryFormatFilter<"Summary"> | $Enums.SummaryFormat
     createdAt?: DateTimeFilter<"Summary"> | Date | string
+    date?: DateTimeFilter<"Summary"> | Date | string
     ownerId?: StringFilter<"Summary"> | string
     owner?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }, "id">
+  }, "id" | "ownerId_date">
 
   export type SummaryOrderByWithAggregationInput = {
     id?: SortOrder
@@ -5778,6 +5796,7 @@ export namespace Prisma {
     isProductive?: SortOrder
     format?: SortOrder
     createdAt?: SortOrder
+    date?: SortOrder
     ownerId?: SortOrder
     _count?: SummaryCountOrderByAggregateInput
     _max?: SummaryMaxOrderByAggregateInput
@@ -5793,6 +5812,7 @@ export namespace Prisma {
     isProductive?: BoolWithAggregatesFilter<"Summary"> | boolean
     format?: EnumSummaryFormatWithAggregatesFilter<"Summary"> | $Enums.SummaryFormat
     createdAt?: DateTimeWithAggregatesFilter<"Summary"> | Date | string
+    date?: DateTimeWithAggregatesFilter<"Summary"> | Date | string
     ownerId?: StringWithAggregatesFilter<"Summary"> | string
   }
 
@@ -5956,6 +5976,7 @@ export namespace Prisma {
     isProductive: boolean
     format: $Enums.SummaryFormat
     createdAt?: Date | string
+    date: Date | string
     owner: UserCreateNestedOneWithoutSummaryInput
   }
 
@@ -5965,6 +5986,7 @@ export namespace Prisma {
     isProductive: boolean
     format: $Enums.SummaryFormat
     createdAt?: Date | string
+    date: Date | string
     ownerId: string
   }
 
@@ -5974,6 +5996,7 @@ export namespace Prisma {
     isProductive?: BoolFieldUpdateOperationsInput | boolean
     format?: EnumSummaryFormatFieldUpdateOperationsInput | $Enums.SummaryFormat
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
     owner?: UserUpdateOneRequiredWithoutSummaryNestedInput
   }
 
@@ -5983,6 +6006,7 @@ export namespace Prisma {
     isProductive?: BoolFieldUpdateOperationsInput | boolean
     format?: EnumSummaryFormatFieldUpdateOperationsInput | $Enums.SummaryFormat
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
   }
 
@@ -5992,6 +6016,7 @@ export namespace Prisma {
     isProductive: boolean
     format: $Enums.SummaryFormat
     createdAt?: Date | string
+    date: Date | string
     ownerId: string
   }
 
@@ -6001,6 +6026,7 @@ export namespace Prisma {
     isProductive?: BoolFieldUpdateOperationsInput | boolean
     format?: EnumSummaryFormatFieldUpdateOperationsInput | $Enums.SummaryFormat
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type SummaryUncheckedUpdateManyInput = {
@@ -6009,6 +6035,7 @@ export namespace Prisma {
     isProductive?: BoolFieldUpdateOperationsInput | boolean
     format?: EnumSummaryFormatFieldUpdateOperationsInput | $Enums.SummaryFormat
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
   }
 
@@ -6233,12 +6260,18 @@ export namespace Prisma {
     not?: NestedEnumSummaryFormatFilter<$PrismaModel> | $Enums.SummaryFormat
   }
 
+  export type SummaryOwnerIdDateCompoundUniqueInput = {
+    ownerId: string
+    date: Date | string
+  }
+
   export type SummaryCountOrderByAggregateInput = {
     id?: SortOrder
     content?: SortOrder
     isProductive?: SortOrder
     format?: SortOrder
     createdAt?: SortOrder
+    date?: SortOrder
     ownerId?: SortOrder
   }
 
@@ -6248,6 +6281,7 @@ export namespace Prisma {
     isProductive?: SortOrder
     format?: SortOrder
     createdAt?: SortOrder
+    date?: SortOrder
     ownerId?: SortOrder
   }
 
@@ -6257,6 +6291,7 @@ export namespace Prisma {
     isProductive?: SortOrder
     format?: SortOrder
     createdAt?: SortOrder
+    date?: SortOrder
     ownerId?: SortOrder
   }
 
@@ -6679,6 +6714,7 @@ export namespace Prisma {
     isProductive: boolean
     format: $Enums.SummaryFormat
     createdAt?: Date | string
+    date: Date | string
   }
 
   export type SummaryUncheckedCreateWithoutOwnerInput = {
@@ -6687,6 +6723,7 @@ export namespace Prisma {
     isProductive: boolean
     format: $Enums.SummaryFormat
     createdAt?: Date | string
+    date: Date | string
   }
 
   export type SummaryCreateOrConnectWithoutOwnerInput = {
@@ -6765,6 +6802,7 @@ export namespace Prisma {
     isProductive?: BoolFilter<"Summary"> | boolean
     format?: EnumSummaryFormatFilter<"Summary"> | $Enums.SummaryFormat
     createdAt?: DateTimeFilter<"Summary"> | Date | string
+    date?: DateTimeFilter<"Summary"> | Date | string
     ownerId?: StringFilter<"Summary"> | string
   }
 
@@ -6957,6 +6995,7 @@ export namespace Prisma {
     isProductive: boolean
     format: $Enums.SummaryFormat
     createdAt?: Date | string
+    date: Date | string
   }
 
   export type LogUpdateWithoutOwnerInput = {
@@ -6983,6 +7022,7 @@ export namespace Prisma {
     isProductive?: BoolFieldUpdateOperationsInput | boolean
     format?: EnumSummaryFormatFieldUpdateOperationsInput | $Enums.SummaryFormat
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type SummaryUncheckedUpdateWithoutOwnerInput = {
@@ -6991,6 +7031,7 @@ export namespace Prisma {
     isProductive?: BoolFieldUpdateOperationsInput | boolean
     format?: EnumSummaryFormatFieldUpdateOperationsInput | $Enums.SummaryFormat
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type SummaryUncheckedUpdateManyWithoutOwnerInput = {
@@ -6999,6 +7040,7 @@ export namespace Prisma {
     isProductive?: BoolFieldUpdateOperationsInput | boolean
     format?: EnumSummaryFormatFieldUpdateOperationsInput | $Enums.SummaryFormat
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 
