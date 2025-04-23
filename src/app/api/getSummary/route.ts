@@ -50,10 +50,17 @@ export async function POST(request: Request){
 
         // i want that when we fetch the user data, it should be in this format, [time] [content]
 
-        // first fetch the current user's logs
+        // first fetch the current user's logs (today's logs)
+
+        const now = new Date();
+        const startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate()) // this resets the might to midnight
+
         const logs = await prisma.log.findMany({
             where: {
-                ownerId: session.user.id
+                ownerId: session.user.id,
+                createdAt: {
+                    gte: startOfToday
+                }
             },
             orderBy: { createdAt: "asc" }
         })
@@ -104,6 +111,16 @@ export async function POST(request: Request){
                 isProductive: isProductive,
                 format: format,
                 date: today
+            }
+        })
+
+        // once the summary is saved, delete all logs
+        await prisma.log.deleteMany({
+            where: {
+                ownerId: session.user.id,
+                createdAt: {
+                    gte: startOfToday
+                }
             }
         })
 
