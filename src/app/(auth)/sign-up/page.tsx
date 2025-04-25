@@ -3,6 +3,7 @@ import { Book, Clock, AlarmClock, Calendar, Goal } from 'lucide-react';
 import SignupForm from '@/components/SignupForm/SignupForm';
 import FeatureCard from '@/components/Card/FeatureCard';
 import { useState } from 'react';
+import Logo from '@/components/Navbar/Logo';
 
 const SignupPage: React.FC = () => {
   
@@ -63,6 +64,7 @@ const SignupPage: React.FC = () => {
       {/* Right side - App info */}
       <div className="w-full lg:w-1/2 bg-gradient-to-br from-purple-700 to-indigo-800 text-white p-8 lg:p-12 flex flex-col">
         <div className="mb-10">
+          <Logo />
         </div>
         
         <div className="flex-grow flex flex-col justify-center">
