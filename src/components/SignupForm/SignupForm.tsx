@@ -32,7 +32,7 @@ const SignupForm: React.FC<SignUpFormProps> = ({ isSignUp }) => {
         
         {isSignUp && (
             <div>
-                <label htmlFor="email" className='block text-sm font-medium text-gray-700 dark:text-white mb-1'>
+                <label htmlFor="name" className='block text-sm font-medium text-gray-700 dark:text-white mb-1'>
                     Email Address
                 </label>
 
@@ -41,7 +41,7 @@ const SignupForm: React.FC<SignUpFormProps> = ({ isSignUp }) => {
                         <User className='h-5 w-5 text-gray-400' />
                     </div>
                     <input
-                    type="email"
+                    type="name"
                     id='email'
                     className='block w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 bg-white dark:text-black'
                     placeholder='John Doe'

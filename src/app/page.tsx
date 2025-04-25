@@ -1,8 +1,12 @@
 'use client'
 import Navbar from "@/components/Navbar/Navbar";
 import { ChevronRight, AlarmClock, Brain, ChartLine } from 'lucide-react';
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+
+  const router = useRouter();
+
   return (
     <div className='min-h-screen'>
       <div className="shadow-sm sticky top-0 backdrop-blur-lg">
@@ -30,6 +34,7 @@ export default function Home() {
 
           <button className="bg-gradient-to-r from-purple-600 to-blue-600 rounded-full sm:p-4 sm:px-8 text-white text-lg font-bold
             mt-12 hover:from-purple-700 hover:to-blue-700 hover:bg-gradient-to-r flex mx-auto items-center gap-2 group py-4 px-18 dark:shadow-sm shadow-purple-500"
+            onClick={() => router.push('/sign-up')}
           >
             Start Your Journey{" "}
             <span className="group-hover:translate-x-2 duration-200">
