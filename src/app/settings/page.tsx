@@ -1,0 +1,200 @@
+'use client'
+import Navbar from '@/components/Navbar/Navbar'
+import { AlignLeft, BellOff, Clock, Layers, Save } from 'lucide-react'
+import { useState } from 'react';
+
+const settingsPage = () => {
+
+  const [selected, setSelected] = useState("segmented");
+  const [isSaved, setIsSaved] = useState(false)
+
+  const handleFormSubmit = (e : React.FormEvent) => {
+    e.preventDefault()
+    setIsSaved(true)
+
+    setTimeout(() => {
+      setIsSaved(false)
+    }, 3000);
+  }
+
+  return (
+    <div className='min-h-screen top-0'>
+
+      <div className='backdrop-blur-lg shadow-sm shadow-blue-700/40 sticky top-0'>
+        <Navbar />
+      </div>
+
+      <hr />
+
+      <div className='max-w-4xl mx-auto px-4 py-8 flex flex-col space-y-6'>
+
+        <h1 className='text-3xl font-black dark:text-white'>
+          Settings
+        </h1>
+
+        {/* notification preferences */}
+        <div className='bg-white shadow-md dark:bg-[#1F2937] rounded-lg px-6 pb-4'>
+
+          <h2 className='text-xl font-bold mt-6'>
+            Notification Preferences
+          </h2>
+          
+          <form
+            onSubmit={handleFormSubmit}
+            className="flex flex-col"
+          >
+
+            {/* upper part */}
+            <div className='flex flex-col mt-6 space-y-4'>
+
+              <div className="flex items-center gap-4">
+                <input type="radio" defaultChecked id="noNotification" value="noNotification" name="NotificationType" className='w-5 h-5 text-purple-600 border-gray-300 focus:ring-purple-500' />
+                <label htmlFor="noNotification" className='flex justify-center items-center gap-4'>
+                  <span className='bg-gray-400 rounded-full self-center p-2'>
+                    <BellOff size={20}/>
+                  </span>
+                  <div>
+                    <span className='font-black text-lg'>
+                      No Notifications
+                    </span>
+                    <p className='text-sm dark:text-gray-300 text-gray-600'>
+                      I'll log entries manually without reminders
+                    </p>
+                  </div>
+                </label>
+              </div>
+            
+              <div className="flex items-center gap-4">
+                <input type="radio" id="fixedIntervals" value="fixedIntervals" name="NotificationType" className='w-5 h-5 text-purple-600 border-gray-300 focus:ring-purple-500' />
+                <label htmlFor="fixedIntervals" className='flex justify-center items-center gap-4'>
+                  <span className='bg-purple-800/40 rounded-full self-center p-2'>
+                    <Clock className='dark:text-purple-400 text-purple-600' size={20}/>
+                  </span>
+                  <div>
+                    <span className='font-black text-lg'>
+                      Fixed Intervals
+                    </span>
+                    <p className='text-sm dark:text-gray-300 text-gray-600'>
+                      Remind me at regular intervals throughout the day
+                    </p>
+                  </div>
+                </label>
+              </div>
+
+            </div>
+            
+            <hr className="my-8 border-t border-gray-600" />
+
+            {/* lower part */}
+            <div className='flex flex-col space-y-4'>
+
+              <h2 className='text-xl font-bold'>
+                Summary Preferences
+              </h2>
+
+              <p className='dark:text-gray-300 text-gray-600'>
+                Choose your preferred default summary format:
+              </p>
+
+              <div className='grid grid-rows-2 grid-cols-1 gap-5 sm:grid-cols-2 sm:grid-rows-1'>
+
+                {/* radio button 1 */}
+                <div
+                  className={`flex border rounded-xl p-4 gap-4 cursor-pointer ${selected === "segmented" ? 
+                    "bg-purple-600/20 border-purple-200" : "border-gray-200"} transition-colors duration-200`}
+                    onClick={() => setSelected("segmented")}
+                >
+                  <input
+                    type="radio"
+                    name="summary"
+                    id="segmented"
+                    value='segmented'
+                    checked={selected === "segmented"}
+                    className='peer w-5 h-5 text-purple-600 border-gray-300 focus:ring-purple-500'
+                    defaultChecked
+                  />
+                  <label htmlFor='segmented' className='space-y-1'>
+
+                    <div className='flex space-x-2'>
+                      <span>
+                        <Layers className='text-purple-400' size={22}/>
+                      </span>
+                      <span className='font-bold'>
+                        Segmented Format
+                      </span>
+                    </div>
+
+                    <p className='text-sm dark:text-gray-300 text-gray-600'>
+                      Divides your day into Morning, Afternoon, Evening, and Night sections
+                    </p>
+
+                  </label>
+                </div>
+
+                {/* radio button 2 */}
+                <div
+                className={`flex border rounded-xl p-4 gap-4 cursor-pointer ${selected === "paragraph" ? 
+                  "bg-purple-600/20 border-purple-200" : "border-gray-200"} transition-colors duration-200`}
+                  onClick={() => setSelected("paragraph")}
+                >
+                  <input
+                    type="radio"
+                    name="summary"
+                    id="paragraph"
+                    value='paragraph'
+                    checked={selected === "paragraph"}
+                    className='peer w-5 h-5 text-purple-600 border-gray-300 focus:ring-purple-500'
+                  />
+                  <label htmlFor='paragraph' className='space-y-1'>
+
+                    <div className='flex space-x-2'>
+                      <span>
+                        <AlignLeft className='text-purple-400' size={22}/>
+                      </span>
+                      <span className='font-bold'>
+                        Paragraph Format
+                      </span>
+                    </div>
+
+                    <p className='text-sm dark:text-gray-300 text-gray-600'>
+                      A concise paragraph summarizing your entire day
+                    </p>
+
+                  </label>
+                </div>
+
+              </div>
+
+            </div>
+
+            <hr className="my-8 border-t border-gray-600" />
+
+            {/* submit button */}
+            <div className='flex justify-end items-center space-x-3'>
+
+            <p className={`text-sm text-green-400 transition-opacity duration-300 ${isSaved ? 'opacity-100' : 'opacity-0'}`}>
+              Settings saved successfully!
+            </p>
+
+              <button
+                className='flex cursor-pointer border border-transparent active:border-purple-300 gap-2
+                rounded-lg p-2 bg-gradient-to-r from-purple-500 to-blue-400 text-lg justify-center items-center font-bold'
+              >
+                <Save size={20} />
+                Save Changes
+              </button>
+
+            </div>
+          
+          </form>
+
+
+        </div>
+        
+      </div>
+
+    </div>
+  )
+}
+
+export default settingsPage
