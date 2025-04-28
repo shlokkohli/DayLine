@@ -8,7 +8,7 @@ export async function POST(request : Request) {
 
         const {name, email, password} = await request.json();
 
-        // check if email of password are missing
+        // check if email, name or password are missing
         if(!name || !email || !password){
             return NextResponse.json(
                 { message: 'Missing fields' },

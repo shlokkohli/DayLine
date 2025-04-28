@@ -4,17 +4,27 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Mail, Lock, User, Eye, EyeOff, ChevronRight } from 'lucide-react';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import axios, {AxiosError} from 'axios'
+import { toast } from 'sonner'
+import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 interface SignUpFormProps {
-    isSignUp: boolean
+    isSignUp: boolean,
+    onSuccessfulSignup: () => void
 }
 
-const SignupForm: React.FC<SignUpFormProps> = ({ isSignUp }) => {
+interface ErrorMessage {
+    message: string
+}
 
-    const [showPassword, setShowPassword] = useState(false)
+const SignupForm: React.FC<SignUpFormProps> = ({ isSignUp, onSuccessfulSignup }) => {
 
-    const { register, formState: {errors} } = useForm<z.infer<typeof signUpSchema>>({
+    const [showPassword, setShowPassword] = useState(false);
+    const router = useRouter();
+
+    const { register, handleSubmit, reset, formState: {errors} } = useForm<z.infer<typeof signUpSchema>>({
         resolver: zodResolver(signUpSchema),
         defaultValues: {
             name: '',
@@ -27,13 +37,61 @@ const SignupForm: React.FC<SignUpFormProps> = ({ isSignUp }) => {
         setShowPassword(!showPassword)
     }
 
+    const handleFormSubmit = async (data: z.infer<typeof signUpSchema>) => {
+
+        try {
+
+            if(isSignUp){
+
+                // take this data and sent it to the backend
+                const response = await axios.post('/api/sign-up', data)
+                toast.success(response.data.message)
+
+                onSuccessfulSignup();
+
+                reset();
+
+            } else {
+
+                const response = await signIn('credentials', {
+                    redirect: false,
+                    email: data.email,
+                    password: data.password
+                })
+
+                if(response?.ok){
+                    router.push('/log')
+                } else {
+                    toast.error('Invalid email or password')
+                    setTimeout(() => {
+                        toast.dismiss();
+                    }, 3000);
+                }
+
+            }
+
+            
+        } catch (error) {
+
+            const axiosError = error as AxiosError
+            const errorMessage = (axiosError.response?.data as ErrorMessage).message
+
+            toast.error(errorMessage)
+
+            setTimeout(() => {
+                toast.dismiss
+            }, 3000);
+            
+        }
+
+    }
+
   return (  
-    <form className='space-y-6'>
-        
+    <form onSubmit={handleSubmit(handleFormSubmit)} className='space-y-6'>
         {isSignUp && (
             <div>
-                <label htmlFor="name" className='block text-sm font-medium text-gray-700 dark:text-white mb-1'>
-                    Email Address
+                <label htmlFor="name" className='block text-sm font-bold text-gray-700 dark:text-white mb-1'>
+                    Name
                 </label>
 
                 <div className='relative'>
@@ -45,6 +103,7 @@ const SignupForm: React.FC<SignUpFormProps> = ({ isSignUp }) => {
                     id='email'
                     className='block w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 bg-white dark:text-black'
                     placeholder='John Doe'
+                    {...register('name')}
                     />
             {errors.name && (
                 <p className='mt-1 text-sm text-red-600'>{errors.name.message}</p>
@@ -54,11 +113,11 @@ const SignupForm: React.FC<SignUpFormProps> = ({ isSignUp }) => {
         )}
 
         <div>
-            <label htmlFor="email" className='block text-sm font-medium text-gray-700 dark:text-white mb-1'>
+            <label htmlFor="email" className='block text-sm font-bold text-gray-700 dark:text-white mb-1'>
                 Email Address
             </label>
             <div className='relative'>
-                    <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
+                    <div className='absolute top-4 left-0 pl-3 flex items-center pointer-events-none'>
                         <Mail className='h-5 w-5 text-gray-400' />
                     </div>
                     <input
@@ -66,6 +125,7 @@ const SignupForm: React.FC<SignUpFormProps> = ({ isSignUp }) => {
                         id='email'
                         className='block w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 bg-white dark:text-black'
                         placeholder='you@example.com'
+                        {...register('email')}
                     />
                 {errors.email && (
                     <p className='mt-1 text-sm text-red-600'>{errors.email.message}</p>
@@ -74,12 +134,12 @@ const SignupForm: React.FC<SignUpFormProps> = ({ isSignUp }) => {
         </div>
 
         <div>
-            <label htmlFor="password" className='block text-sm font-medium text-gray-700 dark:text-white mb-1'>
+            <label htmlFor="password" className='block text-sm font-Bold text-gray-700 dark:text-white mb-1'>
                 Password
             </label>
 
             <div className='relative'>
-                    <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
+                    <div className='absolute top-4 left-0 pl-3 flex items-center pointer-events-none'>
                         <Lock className='h-5 w-5 text-gray-400' />
                     </div>
                     <input
@@ -87,10 +147,11 @@ const SignupForm: React.FC<SignUpFormProps> = ({ isSignUp }) => {
                         id='password'
                         className='block w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 bg-white dark:text-black'
                         placeholder={isSignUp ? 'Create a password' : 'Enter your password'}
+                        {...register('password')}
                     />
                     <button
                         type="button"
-                        className="absolute inset-y-0 right-0 pr-3 flex items-center"
+                        className="absolute inset-y-0 right-0 top-0 pr-3 flex items-center"
                         onClick={togglePasswordVisibility}
                     >
                         {showPassword ? (

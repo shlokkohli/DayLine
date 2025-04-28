@@ -9,6 +9,10 @@ const SignupPage: React.FC = () => {
   
   const [isSignUp, setIsSignUp] = useState(true);
 
+  const handleSuccessfulSignUp = () => {
+    setIsSignUp(false); // Switch to sign-in form
+  };
+
   return (
     <div className="min-h-screen flex flex-col lg:flex-row">
 
@@ -27,7 +31,7 @@ const SignupPage: React.FC = () => {
             </p>
           </div>
           
-          <SignupForm isSignUp={isSignUp} />
+          <SignupForm isSignUp={isSignUp} onSuccessfulSignup={handleSuccessfulSignUp} />
           
           <div className="mt-8 text-center">
             <p className="text-gray-600 dark:text-white">
