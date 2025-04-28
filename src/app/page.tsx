@@ -33,7 +33,7 @@ export default function Home() {
           </div>
 
           <button className="bg-gradient-to-r from-purple-600 to-blue-600 rounded-full sm:p-4 sm:px-8 text-white text-lg font-bold
-            mt-12 hover:from-purple-700 hover:to-blue-700 hover:bg-gradient-to-r flex mx-auto items-center gap-2 group py-4 px-18 dark:shadow-sm shadow-purple-500"
+            mt-12 hover:from-purple-700 hover:to-blue-700 cursor-pointer hover:bg-gradient-to-r flex mx-auto items-center gap-2 group py-4 px-18 dark:shadow-sm shadow-purple-500"
             onClick={() => router.push('/sign-up')}
           >
             Start Your Journey{" "}

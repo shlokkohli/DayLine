@@ -44,7 +44,7 @@ const Navbar = () => {
 
               ) : (
                 <button className='bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700
-                text-white text-lg rounded-full p-2 px-6 transition-all'
+                text-white text-lg rounded-full p-2 px-6 transition-all cursor-pointer'
                   onClick={() => router.push('/sign-up')}>
                     Get Started
                 </button>
