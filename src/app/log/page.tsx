@@ -1,11 +1,13 @@
 'use client'
 import Navbar from '@/components/Navbar/Navbar'
 import { Calendar, ChevronLeft, ChevronRight, Clock, PenLine, Sparkles } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 import React from 'react'
 
 const page = () => {
 
     const currentDate = new Date();
+    const router = useRouter();
 
   return (
     <div className='min-h-screen'>
@@ -74,9 +76,12 @@ const page = () => {
                             <button
                                 type='submit'
                                 className='w-full px-6 py-4 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white rounded-xl font-medium transition-all duration-300 flex items-center justify-center gap-2 group'
+                                onClick={() => router.push('/summary')}
                             >
                                 <Sparkles className='w-5 h-5' />
-                                <span>Generate Summary</span>
+                                <span>
+                                    Generate Summary
+                                </span>
                             </button>
 
                         </div>
