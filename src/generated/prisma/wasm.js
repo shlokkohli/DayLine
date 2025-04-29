@@ -135,7 +135,7 @@ exports.Prisma.SummaryScalarFieldEnum = {
   id: 'id',
   content: 'content',
   isProductive: 'isProductive',
-  format: 'format',
+  SummaryFormat: 'SummaryFormat',
   createdAt: 'createdAt',
   date: 'date',
   ownerId: 'ownerId'
@@ -162,13 +162,13 @@ exports.Prisma.NullsOrder = {
   last: 'last'
 };
 exports.SummaryFormat = exports.$Enums.SummaryFormat = {
-  Precise: 'Precise',
+  Paragraph: 'Paragraph',
   Segmented: 'Segmented'
 };
 
 exports.NotificationTime = exports.$Enums.NotificationTime = {
-  ManuallyEnter: 'ManuallyEnter',
-  SpecificTimes: 'SpecificTimes'
+  NoNotification: 'NoNotification',
+  FixedIntervals: 'FixedIntervals'
 };
 
 exports.Prisma.ModelName = {

@@ -1,0 +1,138 @@
+// import { ai } from "@/lib/gemini";
+// import { systemInstruction } from "@/lib/promptSumarize";
+// import { getServerSession } from "next-auth";
+// import { NextResponse } from "next/server";
+// import { authOptions } from "../auth/[...nextauth]/options";
+// import { prisma } from "@/lib/prisma";
+
+// export async function POST(request: Request){
+
+//     const session = await getServerSession(authOptions);
+//     if(!session?.user.id){
+//         return NextResponse.json(
+//             { message: "Unauthorized" },
+//             { status: 401 }
+//         )
+//     }
+
+//     try {
+
+//         const { format } = await request.json()
+
+//         if(!format){
+//             return NextResponse.json(
+//                 { message: "Invalid format. Please choose a format to generate the summary" },
+//                 { status: 400 }
+//             )
+//         }
+
+//         // first get today's date
+//         const today = new Date();
+//         today.setHours(0, 0, 0, 0);
+
+//         // check if a summary already exists for that day
+//         const existingSummary = await prisma.summary.findUnique({
+//             where: {
+//                 ownerId_date: {
+//                     ownerId: session.user.id,
+//                     date: today
+//                 }
+//             }
+//         })
+
+//         // if summary already exists, do not give any summary
+//         if(existingSummary){
+//             return NextResponse.json(
+//                 { message: "Summary already exists for today" },
+//                 { status: 200 }
+//             )
+//         }
+
+//         // i want that when we fetch the user data, it should be in this format, [time] [content]
+
+//         // first fetch the current user's logs (today's logs)
+
+//         const now = new Date();
+//         const startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate()) // this resets the might to midnight
+
+//         const logs = await prisma.log.findMany({
+//             where: {
+//                 ownerId: session.user.id,
+//                 createdAt: {
+//                     gte: startOfToday
+//                 }
+//             },
+//             orderBy: { createdAt: "asc" }
+//         })
+
+//         if(logs.length === 0){
+//             return NextResponse.json(
+//                 { message: "No logs for today" },
+//                 { status: 404 }
+//             )
+//         }
+
+//         const formattedLogs = logs.map((eachLog) => {
+//             const time = eachLog.createdAt.toLocaleString().split(",")[0].trim()
+//             return `${time} ${eachLog.content}`
+//         }).join('\n')
+
+//         const customLogs = `User's journal entries:
+//         ${formattedLogs}
+//         Generate a summary of the user's day in the ${format} format.`
+
+//         const response = await ai.models.generateContent({
+//             model: "gemini-2.0-flash",
+//             contents: customLogs,
+//             config: {
+//                 systemInstruction: systemInstruction
+//             }
+//         })
+
+//         const output = response.candidates?.[0].content?.parts?.[0] as string
+
+//         const response2 = await ai.models.generateContent({
+//             model: "gemini-2.0-flash",
+//             contents: output,
+//             config: {
+//                 systemInstruction: "You are going to get a user's day summary data an input and you are supposed to label it as productive or non productive. You are not supposed to be polite nor harsh, just be honest and tell the user if the day was productive or not, and make sure to strictly adhere to just true or false. If the day was productive, give a yes, otherwise no. Make sure to write yes or no in all small letters."
+//             }
+//         })
+
+//         const productivityResponse = response2.candidates?.[0].content?.parts?.[0].text
+
+//         const isProductive = productivityResponse === "yes";
+
+//         // take this output and save it to the database
+//         await prisma.summary.create({
+//             data: {
+//                 ownerId: session.user.id,
+//                 content: output,
+//                 isProductive: isProductive,
+//                 SummaryFormat: format,
+//                 date: today
+//             }
+//         })
+
+//         // once the summary is saved, delete all logs
+//         await prisma.log.deleteMany({
+//             where: {
+//                 ownerId: session.user.id,
+//             }
+//         })
+
+//         return NextResponse.json(
+//             { message: "Summary generated", output },
+//             { status: 200 }
+//         )
+        
+//     } catch (error) {
+
+//         return NextResponse.json(
+//             { message: "Error occured while generating summary", error },
+//             { status: 500 }
+//         )
+        
+//     }
+
+// }
