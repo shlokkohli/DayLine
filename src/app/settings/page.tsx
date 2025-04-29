@@ -5,7 +5,6 @@ import { useState } from 'react';
 
 const settingsPage = () => {
 
-  const [selected, setSelected] = useState("segmented");
   const [isSaved, setIsSaved] = useState(false)
 
   const handleFormSubmit = (e : React.FormEvent) => {
@@ -100,16 +99,13 @@ const settingsPage = () => {
 
                 {/* radio button 1 */}
                 <div
-                  className={`flex border rounded-xl p-4 gap-4 cursor-pointer ${selected === "segmented" ? 
-                    "bg-purple-600/20 border-purple-200" : "border-gray-200"} transition-colors duration-200`}
-                    onClick={() => setSelected("segmented")}
+                  className={`flex border rounded-xl p-4 gap-4 cursor-pointer  transition-colors duration-200`}
                 >
                   <input
                     type="radio"
                     name="summary"
                     id="segmented"
                     value='segmented'
-                    checked={selected === "segmented"}
                     className='peer w-5 h-5 text-purple-600 border-gray-300 focus:ring-purple-500'
                     defaultChecked
                   />
@@ -133,16 +129,13 @@ const settingsPage = () => {
 
                 {/* radio button 2 */}
                 <div
-                className={`flex border rounded-xl p-4 gap-4 cursor-pointer ${selected === "paragraph" ? 
-                  "bg-purple-600/20 border-purple-200" : "border-gray-200"} transition-colors duration-200`}
-                  onClick={() => setSelected("paragraph")}
+                className={`flex border rounded-xl p-4 gap-4 cursor-pointer transition-colors duration-200`}
                 >
                   <input
                     type="radio"
                     name="summary"
                     id="paragraph"
                     value='paragraph'
-                    checked={selected === "paragraph"}
                     className='peer w-5 h-5 text-purple-600 border-gray-300 focus:ring-purple-500'
                   />
                   <label htmlFor='paragraph' className='space-y-1'>

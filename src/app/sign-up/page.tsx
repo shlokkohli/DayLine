@@ -4,6 +4,7 @@ import SignupForm from '@/components/SignupForm/SignupForm';
 import FeatureCard from '@/components/Card/FeatureCard';
 import { useState } from 'react';
 import Logo from '@/components/Navbar/Logo';
+import { signIn } from 'next-auth/react';
 
 const SignupPage: React.FC = () => {
   
@@ -12,6 +13,24 @@ const SignupPage: React.FC = () => {
   const handleSuccessfulSignUp = () => {
     setIsSignUp(false); // Switch to sign-in form
   };
+
+  const handleGoogleSignSignin = async () => {
+
+    try {
+
+      const response = await signIn('google', {
+        callbackUrl: '/log'
+      });
+
+      console.log('This is the response', response)
+      
+    } catch (error) {
+
+      console.log("Some error occured")
+      
+    }
+
+  }
 
   return (
     <div className="min-h-screen flex flex-col lg:flex-row">
@@ -56,7 +75,12 @@ const SignupPage: React.FC = () => {
             </div>
             
             <div className="mt-6">
-            <button className="w-full flex items-center dark:bg-white justify-center gap-3 bg-blue-600 text-white py-3 px-4 rounded-3xl transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-blue-500 focus:ring-blue-500">
+            <button
+              className="w-full flex items-center dark:bg-white justify-center gap-3 bg-blue-600 text-white py-3 px-4 rounded-3xl
+              transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-blue-500 
+              focus:ring-blue-500"
+              onClick={handleGoogleSignSignin}
+            >
               <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google logo" className="w-5 h-5" />
               <span className='dark:text-gray-600'>Continue With Google</span>
               </button>
