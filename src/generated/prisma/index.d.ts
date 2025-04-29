@@ -5777,6 +5777,7 @@ export namespace Prisma {
 
   export type SummaryWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    ownerId?: string
     AND?: SummaryWhereInput | SummaryWhereInput[]
     OR?: SummaryWhereInput[]
     NOT?: SummaryWhereInput | SummaryWhereInput[]
@@ -5785,9 +5786,8 @@ export namespace Prisma {
     SummaryFormat?: EnumSummaryFormatFilter<"Summary"> | $Enums.SummaryFormat
     createdAt?: DateTimeFilter<"Summary"> | Date | string
     date?: DateTimeFilter<"Summary"> | Date | string
-    ownerId?: StringFilter<"Summary"> | string
     owner?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }, "id">
+  }, "id" | "ownerId">
 
   export type SummaryOrderByWithAggregationInput = {
     id?: SortOrder
